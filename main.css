@@ -63,11 +63,25 @@
     margin-left: -375px;
 }
 
+/* hide the mobile mock images for desktop */
+img.medium {
+    display: none;
+    visibility: hidden;
+}
+
 /* We only use a single query selector
  * to give the text some breathing room
  * on mobile. */
 @media (max-width: 750px) {
     .entry {
         margin: 25px 0;
+    }
+    img.medium {
+        visibility: visible;
+        display: inline;
+    }
+    img.large {
+        display: none;
+        visibility: hidden;
     }
 }

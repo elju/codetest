@@ -2,19 +2,20 @@
  * for 'global'-ish variables.
  **/
 !function($, moment, window, undefined) {
-    var $body  = $('body'),
+    var $container  = $('.container'),
         $modal = $('<div>').addClass('modal'),
         width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-    // Delegate entry clicks to the body
+    // Delegate entry clicks to the container
     $(function() {
         $.ajax('http://vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
             complete: handleVimeo
         });
-        $body.on('click', '.entry', createModal);
+        $container.on('click', '.entry', createModal);
     });
 
-    /* createEntryHTML returns a wrapped HTML vimeo entry
+    /**
+     * createEntryHTML returns a wrapped HTML vimeo entry
      * @param info - An object containing vimeo data
      */
     function createEntryHTML(info) {
@@ -36,7 +37,8 @@
         return $a;
     };
 
-    /* createModal is run every time a video is clicked.
+    /**
+     * createModal is run every time a video is clicked.
      * It creates a modal with an iframe connected to vimeo.
      * @param {jqEvent} e - standard jquery event
      */
@@ -53,20 +55,21 @@
                 'mozallowfullscreen allowfullscreen>'+
             '</iframe>'
         );
-        $body.append($modal);
+        $container.append($modal);
         $modal.click(function(e) {
             $(this).remove();
         });
         e.preventDefault();
     };
 
-    /* handleVimeo is a basic function to process vimeo JSON data
+    /**
+     * handleVimeo is a basic function to process vimeo JSON data
      * @param data - a jqXHR object
      * @param {string} status - standard jquery status
      */
     function handleVimeo(data, status) {
         var response, $a,
-            $body = $body || $('body');
+            $container = $container || $('.container');
 
         if (status !== 'success') {
             $('<div>').html('<h1>No response from Vimeo...</h1>'+
@@ -76,7 +79,7 @@
         var response = data.responseJSON || [];
         response.forEach(function(info) {
             $a = createEntryHTML(info);
-            $body.append($a);
+            $container.append($a);
         });
     };
 }(jQuery, moment, window);
