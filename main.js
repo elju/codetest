@@ -8,7 +8,7 @@
 
     // Delegate entry clicks to the body
     $(function() {
-        $.ajax('http://vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
+        $.ajax('//vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
             complete: handleVimeo
         });
         $body.on('click', '.entry', createModal);
@@ -68,8 +68,10 @@
         var response, $a,
             $body = $body || $('body');
 
-        if (status === 'error') {
-            alert('No response from Vimeo... try reloading.');
+        if (status !== 'success') {
+            $('<div>').html('<h1>No response from Vimeo...</h1>'+
+               'try reloading.');
+            return;
         }
         var response = data.responseJSON || [];
         response.forEach(function(info) {
