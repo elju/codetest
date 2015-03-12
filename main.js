@@ -8,7 +8,7 @@
 
     // Delegate entry clicks to the body
     $(function() {
-        $.ajax('//vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
+        $.ajax('http://vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
             complete: handleVimeo
         });
         $body.on('click', '.entry', createModal);
