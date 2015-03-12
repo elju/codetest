@@ -4,8 +4,6 @@
 !function($, moment, window, undefined) {
     var $body  = $('body'),
         $modal = $('<div>').addClass('modal'),
-        isTouchDevice = 'ontouchstart' in document.documentElement,
-        height = (window.innerHeight > 0) ? window.innerHeight : screen.height,
         width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
     // Delegate entry clicks to the body
@@ -43,15 +41,15 @@
      * @param {jqEvent} e - standard jquery event
      */
     function createModal(e) {
-        var v_height, v_width,
-            $this = $(this),
+        var $this = $(this),
             info  = $this.data('info');
-        v_height = width > 750 ? 396 : 180;
-        v_width  = width > 750 ? 750 : 320;
+        if (width < 750) {
+            return
+        }
         $modal.html(
             '<iframe src="https://player.vimeo.com/video/'+info.id+
-                '?title=0&byline=0&portrait=0" width="'+v_width+'" '+
-                'height="'+v_height+'" frameborder="0" webkitallowfullscreen '+
+                '?title=0&byline=0&portrait=0" width="750" '+
+                'height="396" frameborder="0" webkitallowfullscreen '+
                 'mozallowfullscreen allowfullscreen>'+
             '</iframe>'
         );
@@ -59,9 +57,6 @@
         $modal.click(function(e) {
             $(this).remove();
         });
-        if (isTouchDevice) {
-            $modal.css('height', height);
-        }
         e.preventDefault();
     };
 
