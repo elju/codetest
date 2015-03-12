@@ -4,6 +4,8 @@
 !function($, moment, window, undefined) {
     var $body  = $('body'),
         $modal = $('<div>').addClass('modal'),
+        isTouchDevice = 'ontouchstart' in document.documentElement,
+        height = (window.innerHeight > 0) ? window.innerHeight : screen.height,
         width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
     // Delegate entry clicks to the body
@@ -57,6 +59,9 @@
         $modal.click(function(e) {
             $(this).remove();
         });
+        if (isTouchDevice) {
+            $modal.css('height', height);
+        }
         e.preventDefault();
     };
 
