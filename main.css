@@ -53,12 +53,18 @@
     margin-left: -375px;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 750px) {
     .entry {
         margin: 25px 0;
     }
 
     .entry h1 {
-        font-size: 42px;
+    }
+
+    .entry iframe {
+        width: 320px;
+        height: 180px;
+        margin-left: -160px;
+        margin-top: -90px;
     }
 }
