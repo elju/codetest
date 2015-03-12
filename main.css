@@ -1,15 +1,30 @@
 .entry {
     padding: 25px 5%;
     display: block;
-    transition: color 0.00s, background 0.5s;
+    transition: background 0.3s, color 0.3s;
     border-bottom: 1px solid black;
     position: relative;
 }
 
+/* Using the clearfix for IE8 and up,
+ * see https://css-tricks.com/snippets/css/clear-fix/ */
 .entry:after {
     content: "";
-    display: block;
+    display: table;
     clear: both;
+}
+
+.entry:hover {
+    background: #7f7f7f;
+    color: white;
+}
+
+.entry h1 {
+    transition: margin 1s;
+}
+
+.entry:hover h1 {
+    margin-left: 20px;
 }
 
 .entry .entry-thumb-container {
@@ -19,11 +34,6 @@
     height: 150px;
     float: left;
     border: 1px solid black;
-}
-
-.entry:hover {
-    background: #7f7f7f;
-    color: white;
 }
 
 .entry-description {
@@ -53,15 +63,11 @@
     margin-left: -375px;
 }
 
+/* We only use a single query selector
+ * to give the text some breathing room
+ * on mobile. */
 @media (max-width: 750px) {
     .entry {
         margin: 25px 0;
-    }
-
-    .entry iframe {
-        width: 320px;
-        height: 180px;
-        margin-left: -160px;
-        margin-top: -90px;
     }
 }
