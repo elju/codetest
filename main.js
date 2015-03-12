@@ -10,6 +10,9 @@ function createEntryHTML(info) {
     $a.addClass("entry").attr("href", url);
     $a.html(
         "<h1>"+ info.title +"</h1>"+
+        "<div class='entry-thumb-container'>"+
+            "<img src='"+info.thumbnail_medium+"'></img>"+
+        "</div>"+
         "<p class='entry-description'>"+ info.description +"</p>"+
         "<span class='entry-upload-date'>"+info.upload_date+"</span>"
     );

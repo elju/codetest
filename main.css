@@ -2,6 +2,22 @@
     padding: 25px 5%;
     display: block;
     transition: all 0.5s;
+    border-bottom: 1px solid black;
+}
+
+.entry:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.entry .entry-thumb-container {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 200px;
+    height: 150px;
+    float: left;
+    border: 1px solid black;
 }
 
 .entry:hover {
@@ -17,8 +33,12 @@
     float: right;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1023px) {
     .entry {
         margin: 25px 0;
+    }
+
+    .entry h1 {
+        font-size: 42px;
     }
 }
