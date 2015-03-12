@@ -3,6 +3,7 @@
     display: block;
     transition: color 0.25s, background 0.5s;
     border-bottom: 1px solid black;
+    position: relative;
 }
 
 .entry:after {
@@ -30,7 +31,9 @@
 }
 
 .entry-upload-date {
-    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .modal {

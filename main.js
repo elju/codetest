@@ -1,7 +1,7 @@
 /* Self-executing function (a #selfie :) ) to give ourselves a namespace
  * for 'global'-ish variables.
  **/
-!function(window) {
+!function($, moment, window, undefined) {
     var $body  = $('body'),
         $modal = $('<div>').addClass('modal');
 
@@ -17,8 +17,9 @@
      * @param info - An object containing vimeo data
      */
     function createEntryHTML(info) {
-        var $a  = $('<a>'),
-            url = info.url;
+        var $a         = $('<a>'),
+            uploadDate = moment(info.upload_date),
+            url        = info.url;
         $a.addClass('entry').attr('href', url);
         $a.html(
             '<h1>'+ info.title +'</h1>'+
@@ -26,7 +27,9 @@
                 '<img src="'+info.thumbnail_medium+'"></img>'+
             '</div>'+
             '<p class="entry-description">'+ info.description +'</p>'+
-            '<span class="entry-upload-date">'+info.upload_date+'</span>'
+            '<span class="entry-upload-date">'+
+                uploadDate.format('MMM Do YYYY')+
+            '</span>'
         );
         $a.data('info', info);
         return $a;
@@ -69,4 +72,4 @@
             $body.append($a);
         });
     };
-}(window);
+}(jQuery, moment, window);
