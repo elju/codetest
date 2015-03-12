@@ -1,5 +1,5 @@
-/* Auto-executing function (a #selfie :) ) to give ourselves a namespace
- * for 'global' variables.
+/* Self-executing function (a #selfie :) ) to give ourselves a namespace
+ * for 'global'-ish variables.
  **/
 !function(window) {
     var $body  = $('body'),
@@ -32,11 +32,18 @@
         return $a;
     };
 
+    /* createModal is run every time a video is clicked.
+     * It creates a modal with an iframe connected to vimeo.
+     * @param {jqEvent} e - standard jquery event
+     */
     function createModal(e) {
         var $this = $(this),
             info  = $this.data('info');
         $modal.html(
-            '<iframe src="https://player.vimeo.com/video/'+info.id+'?title=0&byline=0&portrait=0" width="500" height="264" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/121291579">Lize Mogel on Counter-Cartography</a> from <a href="https://vimeo.com/whitneymuseum">Whitney Museum of American Art</a> on <a href="https://vimeo.com">Vimeo</a>.</p>'
+            '<iframe src="https://player.vimeo.com/video/'+info.id+
+                '?title=0&byline=0&portrait=0" width="750" height="396" '+
+                'frameborder="0" webkitallowfullscreen mozallowfullscreen '+
+                'allowfullscreen></iframe>'
         );
         $body.append($modal);
         $modal.click(function(e) {
