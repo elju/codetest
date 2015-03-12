@@ -64,7 +64,7 @@
             $body = $body || $('body');
 
         if (status === 'error') {
-            alert('whoops');
+            alert('No response from Vimeo... try reloading.');
         }
         var response = data.responseJSON || [];
         response.forEach(function(info) {
