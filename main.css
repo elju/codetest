@@ -1,0 +1,25 @@
+.entry {
+    padding: 25px 5%;
+    display: block;
+    transition: all 0.5s;
+}
+
+.entry:hover {
+    background: black;
+    color: white;
+}
+
+.entry-description {
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.entry-upload-date {
+    float: right;
+}
+
+@media (max-width: 640px) {
+    .entry {
+        margin: 25px 0;
+    }
+}
