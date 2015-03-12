@@ -69,6 +69,10 @@ img.medium {
     visibility: hidden;
 }
 
+img.medium, img.large {
+    max-width: 100%;
+}
+
 /* We only use a single query selector
  * to give the text some breathing room
  * on mobile. */
