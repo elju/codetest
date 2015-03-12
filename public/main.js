@@ -1,18 +1,43 @@
-/* Self-executing function (a #selfie :) ) to give ourselves a namespace
- * for 'global'-ish variables.
- **/
-!function($, moment, window, undefined) {
-    var $container  = $('.container'),
-        $modal = $('<div>').addClass('modal'),
-        width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+/* Self-executing function to give ourselves a clean namespace
+ * to work in.
+ */
+!function($, moment, window) {
+    // Used to measure width of mobile screen
+    // source - http://stackoverflow.com/a/6850319
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-    // Delegate entry clicks to the container
+    
+    /* jQuery on ready call. Figures out current page
+     * and sets up event listeners for pagination.
+     */
     $(function() {
-        $.ajax('http://vimeo.com/api/v2/whitneymuseum/videos.json?page=1', {
-            complete: handleVimeo
+        var page = window.location.hash.substr(1) || 1;
+
+        // set up event listeners
+        $('.container').on('click', '.entry', createModal);
+        $('body').on('click', '.page-button', function(e) {
+            var page = $(this).attr('href').substr(1);
+            fetchVideos(page);
         });
-        $container.on('click', '.entry', createModal);
+
+        fetchVideos(page);
     });
+
+    /**
+     * fetchVideos asynchronously fetches videos from
+     * Vimeo and displays them.
+     * @param {number} page - the number of the Vimeo page
+     */
+    function fetchVideos(page) {
+        var url = 'http://vimeo.com/api/v2/whitneymuseum/videos.json';
+        url += '?page=' + page;
+
+        $('.entry').remove();
+        $('.page').children().
+            removeClass('active').
+            eq(page - 1).addClass('active');
+        $.ajax(url, {complete: handleVimeo});
+    }
 
     /**
      * createEntryHTML returns a wrapped HTML vimeo entry
@@ -43,11 +68,15 @@
      * @param {jqEvent} e - standard jquery event
      */
     function createModal(e) {
-        var $this = $(this),
-            info  = $this.data('info');
+        var $modal = $('<div>').addClass('modal'),
+            $this  = $(this),
+            info   = $this.data('info');
+
+        // if we're on a small screen, send users straight to Vimeo.
         if (width < 750) {
-            return
+            return;
         }
+
         $modal.html(
             '<iframe src="https://player.vimeo.com/video/'+info.id+
                 '?title=0&byline=0&portrait=0" width="750" '+
@@ -55,31 +84,31 @@
                 'mozallowfullscreen allowfullscreen>'+
             '</iframe>'
         );
-        $container.append($modal);
+        $('.container').append($modal);
+
         $modal.click(function(e) {
             $(this).remove();
         });
+
         e.preventDefault();
     };
 
     /**
-     * handleVimeo is a basic function to process vimeo JSON data
+     * handleVimeo is a basic function to process vimeo JSON data.
      * @param data - a jqXHR object
      * @param {string} status - standard jquery status
      */
     function handleVimeo(data, status) {
-        var response, $a,
-            $container = $container || $('.container');
-
+        var response;
         if (status !== 'success') {
             $('<div>').html('<h1>No response from Vimeo...</h1>'+
-               'try reloading.');
-            return;
+               'please try reloading.').appendTo($('.container'));
+            window.location.reload();
         }
-        var response = data.responseJSON || [];
+
+        response = data.responseJSON || [];
         response.forEach(function(info) {
-            $a = createEntryHTML(info);
-            $container.append($a);
+            createEntryHTML(info).appendTo($('.container'));
         });
     };
 }(jQuery, moment, window);

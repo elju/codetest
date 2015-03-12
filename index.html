@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="application_one.css" media="all" rel="stylesheet" type="text/css">
-    <link href="application_two.css" media="all" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href="public/application_one.css" media="all" rel="stylesheet" type="text/css">
+    <link href="public/application_two.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="public/main.css">
     <!-- next line is necessary for mobile friendly-ness -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <img class="large" src="whitney-top.jpg">
-    <img class="medium" src="whitney-top-medium.jpg">
-        <div class="container"></div>
-    <img class="large" src="whitney-bottom.jpg">
-    <img class="medium" src="whitney-bottom-medium.jpg">
+    <img class="large" src="public/images/whitney-top.jpg">
+    <img class="medium" src="public/images/whitney-top-medium.jpg">
+    <div class="container">
+        <div class="page-container">
+            <div class="page">
+                <a class="page-button active" href="#1">1</a>
+                <a class="page-button" href="#2">2</a>
+                <a class="page-button" href="#3">3</a>
+            </div>
+        </div>
+    </div>
+    <img class="large" src="public/images/whitney-bottom.jpg">
+    <img class="medium" src="public/images/whitney-bottom-medium.jpg">
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="http://momentjs.com/downloads/moment.min.js"></script>
-    <script src="main.js"></script>
+    <script src="public/main.js"></script>
 </body>
 </html>
